@@ -1,4 +1,4 @@
-﻿using Insurance.Models;
+using Insurance.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +39,56 @@ namespace Insurance.Controllers
                     signup.Coverage = Coverage;
                     signup.TotalQuote = TotalQuote;
 
-                    db.Quotes.Add(signup);
+                DateTime myDateTime = DateTime.Parse(DateOfBirth);
+                double baseCharge = 50;
+
+                int age = 0;
+                age = DateTime.Now.Year - myDateTime.Year;
+                if (DateTime.Now.DayOfYear < myDateTime.DayOfYear)
+                {
+                    age = -1;
+                }
+
+                if (age < 18)
+                {
+                    baseCharge += 100;
+                }
+                else if (age < 25 || age > 100)
+                {
+                    baseCharge += 25;
+                }
+
+                if (CarYear < 2000 || CarYear > 2015)
+                {
+                    baseCharge += 25;
+                }
+
+                if (CarMake == "porsche" && CarModel == "911 carrera")
+                {
+                    baseCharge += 50;
+                }
+                else if (CarMake == "porsche")
+                {
+                    baseCharge += 25;
+                }
+
+                if (Tickets > 0)
+                {
+                    var ticketTotal = Tickets * 10;
+                    baseCharge += ticketTotal;
+                }
+                if (DUI == "yes")
+                {
+                    var duiTotal = baseCharge * .25;
+                    baseCharge += duiTotal;
+                }
+                if (Coverage == "full coverage")
+                {
+                    var coverageTotal = baseCharge * .50;
+                    baseCharge += coverageTotal;
+                }
+
+                db.Quotes.Add(signup);
                     db.SaveChanges();
                 }
                 return View("Success");
