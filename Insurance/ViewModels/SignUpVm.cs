@@ -16,7 +16,7 @@ namespace Insurance.Models
         public string CarMake { get; set; }
         public string CarModel { get; set; }
         public string Dui { get; set; }
-        public int SpeedingTickets { get; set; }
+        public int Tickets { get; set; }
         public string Coverage { get; set; }
         public decimal TotalQuote { get; set; }
     }
