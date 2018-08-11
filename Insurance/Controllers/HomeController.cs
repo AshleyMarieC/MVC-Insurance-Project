@@ -16,7 +16,7 @@ namespace Insurance.Controllers
 
         [HttpPost]
         public ActionResult Quote(string FirstName, string LastName, string EmailAddress, string DateOfBirth, int CarYear, string CarMake,
-            string CarModel, string DUI, int Tickets, string Coverage, decimal TotalQuote)
+            string CarModel, string Dui, int Tickets, string Coverage, decimal TotalQuote)
         {
         //    if (string.IsNullOrEmpty(FirstName))
         //    {
@@ -34,7 +34,7 @@ namespace Insurance.Controllers
                     signup.CarYear = CarYear;
                     signup.CarMake = CarMake;
                     signup.CarModel = CarModel;
-                    signup.DUI = DUI;
+                    signup.Dui = Dui;
                     signup.Tickets = Tickets;
                     signup.Coverage = Coverage;
                     signup.TotalQuote = TotalQuote;
@@ -77,7 +77,7 @@ namespace Insurance.Controllers
                     var ticketTotal = Tickets * 10;
                     baseCharge += ticketTotal;
                 }
-                if (DUI == "yes")
+                if (Dui == "yes")
                 {
                     var duiTotal = baseCharge * .25;
                     baseCharge += duiTotal;
