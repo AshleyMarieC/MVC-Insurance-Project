@@ -1,4 +1,4 @@
-﻿using Insurance.Models;
+using Insurance.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace Insurance.Controllers
                     signupVm.FirstName = signup.FirstName;
                     signupVm.LastName = signup.LastName;
                     signupVm.EmailAddress = signup.EmailAddress;
-                    signupVm.TotalQuote = Convert.ToDecimal(signup.TotalQuote);
+                   signupVm.TotalQuote = Convert.ToDecimal(signup.TotalQuote);
                  
                     signupVms.Add(signupVm);
                 }
