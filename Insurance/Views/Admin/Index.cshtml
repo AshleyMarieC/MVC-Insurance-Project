@@ -1,26 +1,26 @@
-﻿@using Insurance.Models
+@using Insurance.Models
 @model List<SignUp>
 
-<div class="row no-gutters m-3">
-    <div class="card col-sm-12 col-md-10 col-lg-6 mx-auto shadow">
+<div class="row no-gutters">
+    <div class="card col-sm-12 col-md-12 col-lg-12 mx-auto shadow">
         <div class="card-header text-center">
             <h5 class="m-0">Insurance Sign Ups</h5>
         </div>
         <div class="card-body">
             @foreach (var signup in Model)
             {
-                <div class="row">
+                <div class="row"   style="margin-left:30px; margin-bottom: 15px">
                     <div class="col">
-                        @signup.FirstName
+                        <p> First Name: @signup.FirstName</p> 
                     </div>
                     <div class="col">
-                        @signup.LastName
+                        <p> Last Name: @signup.LastName</p>
                     </div>
                     <div class="col">
-                        @signup.EmailAddress
+                        <p>Email Address: @signup.EmailAddress</p>
                     </div>
                     <div class="col">
-                        @signup.TotalQuote
+                        <p> Insurance Quote: $@signup.TotalQuote</p>
                     </div>
                 </div>
             }
