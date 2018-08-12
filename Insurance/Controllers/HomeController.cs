@@ -16,7 +16,7 @@ namespace Insurance.Controllers
 
         [HttpPost]
         public ActionResult Quote(string FirstName, string LastName, string EmailAddress, string DateOfBirth, int CarYear, string CarMake,
-            string CarModel, string Dui, int Tickets, string Coverage, decimal TotalQuote)
+            string CarModel, string DUI, int Tickets, string Coverage, decimal TotalQuote)
         {
         //    if (string.IsNullOrEmpty(FirstName))
         //    {
@@ -26,7 +26,8 @@ namespace Insurance.Controllers
         //    {
                 using(InsuranceEntities db = new InsuranceEntities())
                 {
-                    var signup = new Quote();
+                double baseCharge = 50;
+                var signup = new Quote();
                     signup.FirstName = FirstName;
                     signup.LastName = LastName;
                     signup.EmailAddress = EmailAddress;
@@ -34,13 +35,14 @@ namespace Insurance.Controllers
                     signup.CarYear = CarYear;
                     signup.CarMake = CarMake;
                     signup.CarModel = CarModel;
-                    signup.Dui = Dui;
+                    signup.DUI = DUI;
                     signup.Tickets = Tickets;
                     signup.Coverage = Coverage;
-                    signup.TotalQuote = TotalQuote;
+                    signup.TotalQuote = Convert.ToDecimal(baseCharge);
 
                 DateTime myDateTime = DateTime.Parse(DateOfBirth);
-                double baseCharge = 50;
+                //double baseCharge = 50;
+                //decimal TotalQuote = Convert.ToDecimal(baseCharge);
 
                 int age = 0;
                 age = DateTime.Now.Year - myDateTime.Year;
@@ -77,7 +79,7 @@ namespace Insurance.Controllers
                     var ticketTotal = Tickets * 10;
                     baseCharge += ticketTotal;
                 }
-                if (Dui == "yes")
+                if (DUI == "yes")
                 {
                     var duiTotal = baseCharge * .25;
                     baseCharge += duiTotal;
@@ -87,9 +89,8 @@ namespace Insurance.Controllers
                     var coverageTotal = baseCharge * .50;
                     baseCharge += coverageTotal;
                 }
-
                 db.Quotes.Add(signup);
-                    db.SaveChanges();
+                db.SaveChanges();
                 }
                 return View("Success");
             } 
