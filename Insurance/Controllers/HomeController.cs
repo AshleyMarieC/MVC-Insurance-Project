@@ -16,7 +16,7 @@ namespace Insurance.Controllers
 
         [HttpPost]
         public ActionResult Quote(string FirstName, string LastName, string EmailAddress, string DateOfBirth, int CarYear, string CarMake,
-            string CarModel, string DUI, int Tickets, string Coverage, decimal TotalQuote)
+            string CarModel, string DUI, int Tickets, string Coverage, decimal TotalQuote = 3.23m)
         {
         //    if (string.IsNullOrEmpty(FirstName))
         //    {
@@ -26,6 +26,7 @@ namespace Insurance.Controllers
         //    {
                 using(InsuranceEntities db = new InsuranceEntities())
                 {
+
                 double baseCharge = 50;
                 var signup = new Quote();
                     signup.FirstName = FirstName;
@@ -38,7 +39,8 @@ namespace Insurance.Controllers
                     signup.DUI = DUI;
                     signup.Tickets = Tickets;
                     signup.Coverage = Coverage;
-                    signup.TotalQuote = Convert.ToDecimal(baseCharge);
+                    //signup.TotalQuote = Convert.ToDecimal(baseCharge);
+                
 
                 DateTime myDateTime = DateTime.Parse(DateOfBirth);
                 //double baseCharge = 50;
@@ -89,6 +91,7 @@ namespace Insurance.Controllers
                     var coverageTotal = baseCharge * .50;
                     baseCharge += coverageTotal;
                 }
+                signup.TotalQuote = Convert.ToDecimal(baseCharge);
                 db.Quotes.Add(signup);
                 db.SaveChanges();
                 }
